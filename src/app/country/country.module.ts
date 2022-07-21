@@ -9,6 +9,8 @@ import { ByCountryComponent } from './pages/by-country/by-country.component';
 import { ByCapitalComponent } from './pages/by-capital/by-capital.component';
 import { ByRegionComponent } from './pages/by-region/by-region.component';
 import { CountryComponent } from './pages/country/country.component';
+import { TableCountryComponent } from './components/table-country/table-country.component';
+import { InputCountryComponent } from './components/input-country/input-country.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { CountryComponent } from './pages/country/country.component';
     ByCapitalComponent,
     ByRegionComponent,
     CountryComponent,
+    TableCountryComponent,
+    InputCountryComponent,
   ],
   imports: [
     FormsModule, // para poder usar el ngModel

@@ -16,14 +16,21 @@ export class ByCountryComponent {
 
   constructor(private countryService: CountryService) {}
 
-  search() {
+  search(query: string) {
     this.isError = false;
-    this.countryService.searchCountry(this.query).subscribe({
+    this.query = query;
+    this.countryService.searchCountry(query).subscribe({
       next: (countries) => (this.countries = countries),
       error: (error) => {
         this.isError = true;
         this.countries = [];
       },
     });
+  }
+
+  suggestions(query: string) {
+    console.log(query);
+    this.isError = false;
+    //TODO: crear sugerencias
   }
 }

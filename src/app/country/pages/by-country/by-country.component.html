@@ -1,55 +1,23 @@
 <h2>Por Pais</h2>
 <hr />
 
-<div class="row">
+<section class="row">
   <div class="col">
-    <form (ngSubmit)="search()" autocomplete="off">
-      <input
-        class="form-control"
-        type="text"
-        name="termino"
-        placeholder="Buscar pais ..."
-        [(ngModel)]="query"
-      />
-    </form>
+    <app-input-country
+      (onSearch)="search($event)"
+      (onDebounce)="suggestions($event)"
+    ></app-input-country>
   </div>
-</div>
+</section>
 
 <hr />
 
-<div *ngIf="isError" class="alert alert-danger">
+<article *ngIf="isError" class="alert alert-danger">
   No se encontro nada con el termino {{ query }}
-</div>
+</article>
 
-<div *ngIf="countries.length > 0" class="row">
+<section *ngIf="countries.length > 0" class="row">
   <div class="col">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Bandera</th>
-          <th>Nombre</th>
-          <th>Poblacion</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let country of countries; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>
-            <img
-              class="small-flag"
-              [src]="country.flags.png"
-              alt="country.name"
-            />
-          </td>
-          <td>{{ country.name }}</td>
-          <td>{{ country.population | number }}</td>
-          <td>
-            <a [routerLink]="['/country', country.cca2]">Ver...</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-table-country [countries]="countries"></app-table-country>
   </div>
-</div>
+</section>
