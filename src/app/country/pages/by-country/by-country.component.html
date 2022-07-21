@@ -21,7 +21,7 @@
   No se encontro nada con el termino {{ query }}
 </div>
 
-<div *ngIf="!isError" class="row">
+<div *ngIf="countries.length > 0" class="row">
   <div class="col">
     <table class="table table-hover">
       <thead>
@@ -34,12 +34,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>bandera</td>
-          <td>nomre</td>
-          <td>235454</td>
-          <td><a href="#">Ver...</a></td>
+        <tr *ngFor="let country of countries; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <img
+              class="small-flag"
+              [src]="country.flags.png"
+              alt="country.name"
+            />
+          </td>
+          <td>{{ country.name }}</td>
+          <td>{{ country.population | number }}</td>
+          <td>
+            <a [routerLink]="['/country', country.cca2]">Ver...</a>
+          </td>
         </tr>
       </tbody>
     </table>
