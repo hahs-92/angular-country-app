@@ -13,6 +13,7 @@ export class ByCountryComponent {
   query = '';
   isError = false;
   countries: Country[] = [];
+  placeholder = 'Buscar por pais ...';
 
   constructor(private countryService: CountryService) {}
 

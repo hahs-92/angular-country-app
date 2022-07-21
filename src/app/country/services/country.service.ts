@@ -19,6 +19,14 @@ export class CountryService {
     //de esta forma capturamos el error
     // return this.http.get(URL).pipe(catchError((err) => of([])));
   }
+
+  searchCapital(capitalName: string): Observable<Country[]> {
+    const URL = `${this.BASE_URL}/capital/${capitalName}`;
+    return this.http.get<Country[]>(URL);
+
+    //de esta forma capturamos el error
+    // return this.http.get(URL).pipe(catchError((err) => of([])));
+  }
 }
 
 // <!-- api: https://restcountries.com/#api-endpoints-v3-all -->

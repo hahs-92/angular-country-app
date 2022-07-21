@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
 //
 import { debounceTime, Subject } from 'rxjs';
 
@@ -10,6 +10,7 @@ import { debounceTime, Subject } from 'rxjs';
 export class InputCountryComponent implements OnInit {
   @Output() onSearch: EventEmitter<string> = new EventEmitter();
   @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+  @Input() placeholder: string = '';
 
   //crear un observable
   //se va a ejecutar cada vez que deje de escribir
@@ -32,6 +33,7 @@ export class InputCountryComponent implements OnInit {
   }
 
   keyDown() {
+    console.log('keyDown');
     this.debouncer.next(this.query);
   }
 }

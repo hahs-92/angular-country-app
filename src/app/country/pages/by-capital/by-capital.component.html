@@ -1,1 +1,23 @@
-<p>by-capital works!</p>
+<h2>Por Pais</h2>
+<hr />
+
+<section class="row">
+  <div class="col">
+    <app-input-country
+      [placeholder]="placeholder"
+      (onSearch)="search($event)"
+    ></app-input-country>
+  </div>
+</section>
+
+<hr />
+
+<article *ngIf="isError" class="alert alert-danger">
+  No se encontro nada con el termino {{ query }}
+</article>
+
+<section *ngIf="countries.length > 0" class="row">
+  <div class="col">
+    <app-table-country [countries]="countries"></app-table-country>
+  </div>
+</section>
