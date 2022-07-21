@@ -23,9 +23,11 @@ export class CountryService {
   searchCapital(capitalName: string): Observable<Country[]> {
     const URL = `${this.BASE_URL}/capital/${capitalName}`;
     return this.http.get<Country[]>(URL);
+  }
 
-    //de esta forma capturamos el error
-    // return this.http.get(URL).pipe(catchError((err) => of([])));
+  getCountryByCode(id: string): Observable<Country> {
+    const URL = `${this.BASE_URL}/alpha/${id}`;
+    return this.http.get<Country>(URL);
   }
 }
 
