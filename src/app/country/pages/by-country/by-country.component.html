@@ -17,9 +17,11 @@
 
 <hr />
 
-<div class="alert alert-danger">No se encontro nada con el termino ABS</div>
+<div *ngIf="isError" class="alert alert-danger">
+  No se encontro nada con el termino {{ query }}
+</div>
 
-<div class="row">
+<div *ngIf="!isError" class="row">
   <div class="col">
     <table class="table table-hover">
       <thead>

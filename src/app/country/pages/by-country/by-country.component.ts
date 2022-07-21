@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+//services
+import { CountryService } from '../../services/country.service';
 
 @Component({
   selector: 'app-by-country',
@@ -7,10 +9,15 @@ import { Component } from '@angular/core';
 })
 export class ByCountryComponent {
   query = '';
+  isError = false;
 
-  constructor() {}
+  constructor(private countryService: CountryService) {}
 
   search() {
-    console.log(this.query);
+    this.isError = false;
+    this.countryService.searchCountry(this.query).subscribe({
+      next: (countries) => console.log(countries),
+      error: (error) => (this.isError = true),
+    });
   }
 }
