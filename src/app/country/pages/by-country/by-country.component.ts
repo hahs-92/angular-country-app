@@ -7,18 +7,27 @@ import { Country } from '../../interfaces/country.interface';
 @Component({
   selector: 'app-by-country',
   templateUrl: './by-country.component.html',
-  styles: [],
+  styles: [
+    `
+      li {
+        cursor: pointer;
+      }
+    `,
+  ],
 })
 export class ByCountryComponent {
   query = '';
   isError = false;
   countries: Country[] = [];
+  suggestionCountries: Country[] = [];
   placeholder = 'Buscar por pais ...';
+  showSuggestions: boolean = false;
 
   constructor(private countryService: CountryService) {}
 
   search(query: string) {
     this.isError = false;
+    this.showSuggestions = false;
     this.query = query;
     this.countryService.searchCountry(query).subscribe({
       next: (countries) => (this.countries = countries),
@@ -30,8 +39,17 @@ export class ByCountryComponent {
   }
 
   suggestions(query: string) {
-    console.log(query);
     this.isError = false;
-    //TODO: crear sugerencias
+    this.query = query;
+    this.showSuggestions = true;
+
+    this.countryService.searchCountry(query).subscribe({
+      next: (countries) => (this.suggestionCountries = countries.splice(0, 5)),
+      error: (err) => (this.suggestionCountries = []),
+    });
+  }
+
+  searchSuggestion(query: string) {
+    this.search(query);
   }
 }

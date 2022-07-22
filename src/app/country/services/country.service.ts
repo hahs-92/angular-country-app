@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { catchError, Observable, of, tap } from 'rxjs';
 //interfaces
 import { Country } from '../interfaces/country.interface';
 
@@ -10,11 +10,19 @@ import { Country } from '../interfaces/country.interface';
 export class CountryService {
   private BASE_URL = 'https://restcountries.com/v2';
 
+  get httpParams() {
+    //optimizar
+    return new HttpParams().set(
+      'fields',
+      'name,capital,flags,population,alpha2Code'
+    );
+  }
+
   constructor(private http: HttpClient) {}
 
   searchCountry(countryName: string): Observable<Country[]> {
     const URL = `${this.BASE_URL}/name/${countryName}`;
-    return this.http.get<Country[]>(URL);
+    return this.http.get<Country[]>(URL, { params: this.httpParams });
 
     //de esta forma capturamos el error
     // return this.http.get(URL).pipe(catchError((err) => of([])));
@@ -22,7 +30,7 @@ export class CountryService {
 
   searchCapital(capitalName: string): Observable<Country[]> {
     const URL = `${this.BASE_URL}/capital/${capitalName}`;
-    return this.http.get<Country[]>(URL);
+    return this.http.get<Country[]>(URL, { params: this.httpParams });
   }
 
   getCountryByCode(id: string): Observable<Country> {
@@ -32,7 +40,9 @@ export class CountryService {
 
   searchCountriesByRegion(region: string): Observable<Country[]> {
     const URL = `${this.BASE_URL}/regionalbloc/${region}`;
-    return this.http.get<Country[]>(URL);
+    return this.http
+      .get<Country[]>(URL, { params: this.httpParams })
+      .pipe(tap(console.log));
   }
 }
 
