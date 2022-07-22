@@ -29,6 +29,11 @@ export class CountryService {
     const URL = `${this.BASE_URL}/alpha/${id}`;
     return this.http.get<Country>(URL);
   }
+
+  searchCountriesByRegion(region: string): Observable<Country[]> {
+    const URL = `${this.BASE_URL}/regionalbloc/${region}`;
+    return this.http.get<Country[]>(URL);
+  }
 }
 
 // <!-- api: https://restcountries.com/#api-endpoints-v3-all -->
